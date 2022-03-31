@@ -1,8 +1,7 @@
 # IP_Geolocation
-CCPS 530 Project
-Credit : https://github.com/expressjs/express/tree/master/examples/auth
+CCPS 530 Project <br>
+Credit : https://github.com/expressjs/express/tree/master/examples/auth <br>
 This project is only developed for education project purposes. 
 
-Steps:
-#Install node modules
-npm install express
+Steps: <br>
+To Install node modules : npm install express
