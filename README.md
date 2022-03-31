@@ -7,4 +7,5 @@ Steps: <br>
 To Install node modules : <br>
 npm install express <br>
 npm install pbkdf2-password <br>
-npm install express-session
+npm install express-session <br>
+npm install ejs
