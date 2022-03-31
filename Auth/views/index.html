@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Project: IP Geolocation</title>
+  <meta charset="utf-8" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+  <script>
+       function ipfindurl() {
+           var strText = document.getElementById("ip").value;
+           var result = "https://ipfind.co/?ip="+strText+"&auth=b4a271d1-2389-4be9-8d51-29c5a71895de";
+           localStorage.setItem("myurl",result);
+
+       }
+   </script>
+   <style>
+   .button {
+  background-color: white;
+  border: 2px solid #555555;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #555555;
+  color: white;
+}
+</style>
+ </head>
+ <body style="background-color:#008080;">
+   <h1>Find IP Adress Geolocation</h1>
+   <label for="ip">Enter IP Address:</label>
+   <input type="text" id="ip" /><br>
+       <button class="button button5"  onclick="ipfindurl()">Submit</button> <br />
+
+           <button class="button" onclick="ipfind()">Find location on map</button> <br />
+<button class="button" onClick="window.location.reload();">Refresh Page</button>
+ <div id="map" style="width: 1000px; height: 600px;"></div>
+         <script>
+         function ipfind(){
+         var x = localStorage.getItem("myurl");
+         $.getJSON(x, function(result){
+         	console.log('res', result);
+         var map = L.map('map').setView([result.latitude, result.longitude], 13);
+         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+         attribution: '&copy; <a href=”http://osm.org/copyright”>OpenStreetMap</a> contributors'
+         }).addTo(map);
+         L.marker([result.latitude,result.longitude]).addTo(map)
+         .bindPopup("<b>IP Address Location:</b><br />" + result.city +", "+ result.region +", "+ result.postal_code+ ", " +result.country ).openPopup();
+       });}
+         </script>
+</body>
+</html>
